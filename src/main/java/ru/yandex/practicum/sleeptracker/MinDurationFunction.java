@@ -1,6 +1,7 @@
 package ru.yandex.practicum.sleeptracker;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 
 public class MinDurationFunction implements Function<List<SleepingSession>, SleepAnalysisResult> {
@@ -8,6 +9,7 @@ public class MinDurationFunction implements Function<List<SleepingSession>, Slee
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> sessions) {
         long min = sessions.stream()
+                .filter(Objects::nonNull)
                 .mapToLong(SleepingSession::getDurationMinutes)
                 .min()
                 .orElse(0);
